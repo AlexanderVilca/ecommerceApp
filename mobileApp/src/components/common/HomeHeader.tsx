@@ -4,6 +4,7 @@ import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/styles';
 import { Heart, Search, ShoppingCart } from 'lucide-react-native';
 import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const HomeHeader = () => {
   const navigation = useNavigation<any>();
@@ -27,48 +28,53 @@ const HomeHeader = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Logo */}
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('../../images/logo-beltran.webp')}
-          resizeMode="contain"
-          style={styles.logo}
-        />
-        <Text style={styles.welcomeText}>Bienvenido Usuario</Text>
+    <SafeAreaView edges={["top"]} style={styles.safeArea}>
+      <View style={styles.container}>
+        {/* Logo */}
+        <View style={styles.logoContainer}>
+          <Image
+            source={require('../../images/logo-beltran.webp')}
+            resizeMode="contain"
+            style={styles.logo}
+          />
+          <Text style={styles.welcomeText}>Bienvenido Usuario</Text>
+        </View>
+        {/* Icons */}
+        <View style={styles.rightSection}>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={handleNavigateToSearch}
+          >
+            <Search color={colors.textPrimary} size={22} />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={handleNavigateToFavorite}
+          >
+            <Heart color={colors.textPrimary} size={22} />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>0</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.iconButton}
+            onPress={handleNavigateToCart}
+          >
+            <ShoppingCart color={colors.textPrimary} size={22} />
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>0</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
-      {/* Icons */}
-      <View style={styles.rightSection}>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={handleNavigateToSearch}
-        >
-          <Search color={colors.textPrimary} size={22} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={handleNavigateToFavorite}
-        >
-          <Heart color={colors.textPrimary} size={22} />
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>0</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.iconButton}
-          onPress={handleNavigateToCart}
-        >
-          <ShoppingCart color={colors.textPrimary} size={22} />
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>0</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: colors.background,
+  },
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

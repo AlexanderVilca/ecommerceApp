@@ -3,7 +3,8 @@ import React from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../constants/colors';
 import { spacing } from '../../constants/styles';
-import { ChevronLeft, Search } from 'lucide-react-native';
+import { ChevronLeft, Heart, Search, ShoppingBag } from 'lucide-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface CommonHeaderProps {
   title: string;
@@ -18,7 +19,6 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   title,
   showBackButton = true,
   showSearchIcon = true,
-  showCartIcon = true,
   showWhishlistIcon = true,
   onBackPress,
 }) => {
@@ -45,29 +45,62 @@ const CommonHeader: React.FC<CommonHeaderProps> = ({
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.leftSection}>
-        {/* Left */}
-        {showBackButton && (
-          <TouchableOpacity>
-            <ChevronLeft color={colors.textPrimary} size={24} />
-          </TouchableOpacity>
-        )}
-        <Text>{title}</Text>
+    <SafeAreaView edges={["top"]} style={styles.safeArea}>
+      <View style={styles.container}>
+        <View style={styles.leftSection}>
+          {/* Left */}
+          {showBackButton && (
+            <TouchableOpacity
+              style={styles.backButton}
+              onPress={handleBackPress}
+            >
+              <ChevronLeft color={colors.textPrimary} size={24} />
+            </TouchableOpacity>
+          )}
+          <Text>{title}</Text>
+        </View>
+        <View style={styles.rightSection}>
+          {/* Right */}
+          {showSearchIcon && (
+            <TouchableOpacity
+              onPress={handleSearchPress}
+              style={styles.iconButton}
+            >
+              <Search color={colors.textPrimary} size={20} />
+            </TouchableOpacity>
+          )}
+          {showWhishlistIcon && (
+            <TouchableOpacity
+              onPress={handleFavoritePress}
+              style={styles.iconButton}
+            >
+              <Heart color={colors.textPrimary} size={20} />
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>0</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+          {showWhishlistIcon && (
+            <TouchableOpacity
+              onPress={handleCartPress}
+              style={styles.iconButton}
+            >
+              <ShoppingBag color={colors.textPrimary} size={20} />
+              <View style={styles.badge}>
+                <Text style={styles.badgeText}>0</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-      <View style={styles.rightSection}>
-        {/* Right */}
-        {showSearchIcon && (
-          <TouchableOpacity onPress={handleSearchPress} style={styles.iconButton}>
-            <Search color={colors.textPrimary} />
-          </TouchableOpacity>
-        )}
-      </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    backgroundColor: colors.background,
+  },
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
