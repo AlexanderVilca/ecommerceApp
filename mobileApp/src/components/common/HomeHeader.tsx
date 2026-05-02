@@ -37,7 +37,7 @@ const HomeHeader = () => {
             resizeMode="contain"
             style={styles.logo}
           />
-          <Text style={styles.welcomeText}>Bienvenido Usuario</Text>
+          <Text style={styles.welcomeText}>Bienvenido, Usuario</Text>
         </View>
         {/* Icons */}
         <View style={styles.rightSection}>

@@ -1,0 +1,7 @@
+export const ENV = {
+  SANITY_PROJECT_ID: 'tikczym8',
+  SANITY_DATASET: 'production',
+  SANITY_API_VERSION: '2024-04-27',
+  SANITY_TOKEN:
+    'skOZfABT7fgs1kKwt7VpeXUoUxrp4i9JLJS6oPC8Hs2Mhlt5zr0J9OWKZD2fKHpW0imc0Y4S5GVpVoMQy2XBgPffYuhdtB9R0Xg4XAsJzCCshh3lHwVxc0jiSjc3ZhsN0f1QkLsHhGe4fNdeb0XeWJ48vCkpVRbaMeduF8ONamLo7Djf6ho0',
+};
